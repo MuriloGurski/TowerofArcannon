@@ -41,7 +41,9 @@ icon_alignment = 1
 
 [node name="OptionsButton" type="Button" parent="MainMenu"]
 layout_mode = 2
+text = "Options"
 icon = ExtResource("3_ajhr2")
+icon_alignment = 1
 
 [node name="QuitButton" type="Button" parent="MainMenu"]
 layout_mode = 2
