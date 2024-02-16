@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://be3xvkxml43ns"]
 
-[ext_resource type="Texture2D" uid="uid://giwxv0vndg3l" path="res://Textures/backgroundmenu.png" id="1_0avsf"]
-[ext_resource type="Texture2D" uid="uid://cm620taaada4r" path="res://Textures/startbuttonbg.png" id="2_g0bmn"]
-[ext_resource type="Texture2D" uid="uid://mmgnvivb555v" path="res://Textures/buttonbg.png" id="3_ajhr2"]
+[ext_resource type="Texture2D" uid="uid://h60jy38ypafw" path="res://Textures/backgroundmenu.png" id="1_0avsf"]
+[ext_resource type="FontFile" uid="uid://wtywq2lmby41" path="res://Fonts/ARCADECLASSIC.TTF" id="2_pg8hl"]
+[ext_resource type="Texture2D" uid="uid://c8kslrageliyy" path="res://Textures/menuoptionicon.png" id="2_sesqc"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -26,25 +26,47 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -35.0
+offset_left = -52.0
 offset_top = -50.5
-offset_right = 35.0
+offset_right = 52.0
 offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="StartButton" type="Button" parent="MainMenu"]
 layout_mode = 2
-icon = ExtResource("2_g0bmn")
-text_overrun_behavior = 4
-icon_alignment = 1
+theme_override_fonts/font = ExtResource("2_pg8hl")
+text = "Start"
+icon = ExtResource("2_sesqc")
+alignment = 0
 
 [node name="OptionsButton" type="Button" parent="MainMenu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pg8hl")
 text = "Options"
-icon = ExtResource("3_ajhr2")
-icon_alignment = 1
+icon = ExtResource("2_sesqc")
+alignment = 0
 
 [node name="QuitButton" type="Button" parent="MainMenu"]
 layout_mode = 2
-icon = ExtResource("3_ajhr2")
+theme_override_fonts/font = ExtResource("2_pg8hl")
+text = "Quit"
+icon = ExtResource("2_sesqc")
+alignment = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.500434
+anchor_top = 0.12037
+anchor_right = 0.500434
+anchor_bottom = 0.12037
+offset_left = -224.5
+offset_right = 224.5
+offset_bottom = 54.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_pg8hl")
+theme_override_font_sizes/font_size = 52
+text = "toWER OF ARCANNON"
+metadata/_edit_use_anchors_ = true
