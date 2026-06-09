@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cjy2lb8ua10k4"]
+
+[node name="Room01" type="Node2D" unique_id=286841899]
+
+[node name="Root" type="Node2D" parent="." unique_id=609291035]
+
+[node name="TileMap" type="TileMap" parent="." unique_id=163393606]
+format = 2
+
+[node name="Doors" type="Node2D" parent="." unique_id=1464559730]
+
+[node name="North" type="Marker2D" parent="Doors" unique_id=149400330]
+
+[node name="South" type="Marker2D" parent="Doors" unique_id=1613152508]
+
+[node name="East" type="Marker2D" parent="Doors" unique_id=338819649]
+
+[node name="West" type="Marker2D" parent="Doors" unique_id=1719093551]
+position = Vector2(0, 2)
