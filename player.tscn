@@ -226,7 +226,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sweqy")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_down",
 "speed": 10.0
 }, {
@@ -243,7 +243,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b26j0")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
 "speed": 10.0
 }, {
@@ -260,7 +260,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_urp6f")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_up",
 "speed": 10.0
 }, {
@@ -426,4 +426,6 @@ script = ExtResource("1_onrkg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=866365347]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_pfmca")
-animation = &"attack_down"
+animation = &"attack_up"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
