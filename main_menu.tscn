@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://be3xvkxml43ns"]
+[gd_scene format=3 uid="uid://be3xvkxml43ns"]
 
 [ext_resource type="Texture2D" uid="uid://h60jy38ypafw" path="res://Textures/backgroundmenu.png" id="1_0avsf"]
 [ext_resource type="FontFile" uid="uid://wtywq2lmby41" path="res://Fonts/ARCADECLASSIC.TTF" id="2_pg8hl"]
