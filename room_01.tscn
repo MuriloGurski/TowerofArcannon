@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cjy2lb8ua10k4"]
 
+[ext_resource type="Script" uid="uid://djtxchnprrjgt" path="res://room_01.gd" id="1_2c8jk"]
 [ext_resource type="Texture2D" uid="uid://dll07ed1miuyl" path="res://icon.svg" id="1_utt8h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2c8jk"]
@@ -73,6 +74,7 @@ texture = ExtResource("1_utt8h")
 sources/0 = SubResource("TileSetAtlasSource_2c8jk")
 
 [node name="Room01" type="Node2D" unique_id=286841899]
+script = ExtResource("1_2c8jk")
 
 [node name="Root" type="Node2D" parent="." unique_id=609291035]
 
