@@ -30,14 +30,14 @@ func _physics_process(_delta: float) -> void:
 		handle_dash(_delta)
 		move_and_slide()
 		return
+	if current_state == State.ATTACK:
+		velocity = Vector2.ZERO
+		return
 	if Input.is_action_just_pressed("attack") and current_state != State.ATTACK:
 		hero.attack_ability.use(self,last_direction)
 	if Input.is_action_just_pressed("dodge") and current_state != State.DODGE:
 		hero.mobility_ability.use(self,last_direction)
 	#Parar de se mover ao atacar
-	if current_state == State.ATTACK:
-		velocity = Vector2.ZERO
-		return
 	
 	move()
 	move_and_slide()
