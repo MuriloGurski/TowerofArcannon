@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://k718qefrkdqq"]
 
 [ext_resource type="Script" uid="uid://pdvula03oo1" path="res://scripts/player.gd" id="1_onrkg"]
-[ext_resource type="PackedScene" uid="uid://bp7dsb82kexwj" path="res://generic_hero.tscn" id="2_onrkg"]
+[ext_resource type="Resource" uid="uid://b2qtwxwr11rnb" path="res://generic_hero.tres" id="2_onrkg"]
 
 [node name="Player" type="CharacterBody2D" unique_id=966591663]
 script = ExtResource("1_onrkg")
 hero = ExtResource("2_onrkg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1715573463]

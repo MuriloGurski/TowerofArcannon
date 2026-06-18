@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://be3xvkxml43ns"]
 
-[ext_resource type="Texture2D" uid="uid://h60jy38ypafw" path="res://Textures/backgroundmenu.png" id="1_0avsf"]
-[ext_resource type="FontFile" uid="uid://wtywq2lmby41" path="res://Fonts/ARCADECLASSIC.TTF" id="2_pg8hl"]
-[ext_resource type="Texture2D" uid="uid://c8kslrageliyy" path="res://Textures/menuoptionicon.png" id="2_sesqc"]
+[ext_resource type="Texture2D" uid="uid://h60jy38ypafw" path="res://ui/menus/backgroundmenu.png" id="1_0avsf"]
+[ext_resource type="FontFile" uid="uid://wtywq2lmby41" path="res://assets/fonts/ARCADECLASSIC.TTF" id="2_pg8hl"]
+[ext_resource type="Texture2D" uid="uid://c8kslrageliyy" path="res://ui/menus/menuoptionicon.png" id="2_sesqc"]
 
 [node name="Menu" type="Control" unique_id=738531739]
 layout_mode = 3

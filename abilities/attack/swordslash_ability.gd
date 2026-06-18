@@ -1,0 +1,8 @@
+extends Ability
+
+#@export var speed := 500.0
+#@export var duration := 0.25
+
+func use(controller, dir):
+	#controller.start_dash(dir, speed, duration)
+	controller.play_animation(animation_id, dir)

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" format=3 uid="uid://l3o8l3drk4mr"]
+
+[ext_resource type="Script" uid="uid://dru2g1mgq803p" path="res://abilities/attack/swordslash_ability.gd" id="1_hrfo8"]
+
+[resource]
+script = ExtResource("1_hrfo8")
+ability_name = "Sword Slash"
+cooldown = 1.0
+animation_id = 1
+metadata/_custom_type_script = "uid://bv6p1pqodmcsg"

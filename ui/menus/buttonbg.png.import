@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvhx8hc5mnh4g"
-path="res://.godot/imported/Barba_Branca.png-566e4c701a93fb518e745eabfba06675.ctex"
+uid="uid://mmgnvivb555v"
+path="res://.godot/imported/buttonbg.png-0b7ba4574fffdc9070b7036b7b631e89.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/enemy/Barba_Branca.png"
-dest_files=["res://.godot/imported/Barba_Branca.png-566e4c701a93fb518e745eabfba06675.ctex"]
+source_file="res://ui/menus/buttonbg.png"
+dest_files=["res://.godot/imported/buttonbg.png-0b7ba4574fffdc9070b7036b7b631e89.ctex"]
 
 [params]
 

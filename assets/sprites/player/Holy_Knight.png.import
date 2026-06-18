@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h60jy38ypafw"
-path="res://.godot/imported/backgroundmenu.png-341a1dab1fec89905664799c31364d27.ctex"
+uid="uid://b55dssrl2aypx"
+path="res://.godot/imported/Holy_Knight.png-be39f35358f68b2143546ff8123a2351.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/backgroundmenu.png"
-dest_files=["res://.godot/imported/backgroundmenu.png-341a1dab1fec89905664799c31364d27.ctex"]
+source_file="res://assets/sprites/player/Holy_Knight.png"
+dest_files=["res://.godot/imported/Holy_Knight.png-be39f35358f68b2143546ff8123a2351.ctex"]
 
 [params]
 

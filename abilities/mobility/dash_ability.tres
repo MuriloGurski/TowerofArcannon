@@ -1,0 +1,10 @@
+[gd_resource type="Resource" format=3 uid="uid://bh6j7qxoerj2l"]
+
+[ext_resource type="Script" uid="uid://bcasc1o3c5uqn" path="res://abilities/mobility/dash_ability.gd" id="1_evg3h"]
+
+[resource]
+script = ExtResource("1_evg3h")
+ability_name = "Dash"
+cooldown = 3.0
+animation_id = 5
+metadata/_custom_type_script = "uid://bv6p1pqodmcsg"
