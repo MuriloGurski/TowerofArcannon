@@ -1,6 +1,7 @@
 extends Resource
 
 class_name Hero
+
 var animations = {
 	0:"idle",
 	1:"attack",
@@ -16,6 +17,9 @@ var animations = {
 @export var sprite_frames: SpriteFrames
 @export var health: int = 100
 @export var speed = 300
+@export var strength : int
+@export var dexterity : int
+@export var intellect : int
 @export var attack_ability : Resource
 @export var secondary_ability : Resource
 @export var mobility_ability : Resource

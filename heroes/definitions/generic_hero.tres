@@ -4,10 +4,15 @@
 [ext_resource type="Script" uid="uid://c58fge2awg4ww" path="res://heroes/generic_hero.gd" id="1_loq45"]
 [ext_resource type="SpriteFrames" uid="uid://dy4nd5u846woe" path="res://assets/sprites/player/generic_hero_sprites.tres" id="2_1sgye"]
 [ext_resource type="Resource" uid="uid://bh6j7qxoerj2l" path="res://abilities/mobility/dash_ability.tres" id="2_d6cw5"]
+[ext_resource type="Resource" uid="uid://byupmxdl78mik" path="res://abilities/buff/buff_ability.tres" id="4_8moji"]
 
 [resource]
 script = ExtResource("1_loq45")
 hero_name = "Generic Hero"
 sprite_frames = ExtResource("2_1sgye")
+strength = 15
+dexterity = 15
+intellect = 15
 attack_ability = ExtResource("1_1sgye")
 mobility_ability = ExtResource("2_d6cw5")
+special_ability = ExtResource("4_8moji")

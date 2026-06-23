@@ -11,6 +11,11 @@ enum State {
 	PARRY,
 	RUN
 }
+enum Attributes{
+	STR, #0
+	DEX, 
+	INT #2
+}
 @export var ability_name: String
 @export var cooldown : float = 0.0
 @export var animation_id : State

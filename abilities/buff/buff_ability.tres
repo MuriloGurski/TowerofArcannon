@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://byupmxdl78mik"]
+
+[ext_resource type="Script" uid="uid://43yp7gdj43dj" path="res://abilities/buff/buff_ability.gd" id="1_l16bc"]
+
+[resource]
+script = ExtResource("1_l16bc")
+value = 1.2
+duration = 5.0
+multi = true
+ability_name = "Sharpen blade"
+cooldown = 5.0
+animation_id = 2
+metadata/_custom_type_script = "uid://bv6p1pqodmcsg"
