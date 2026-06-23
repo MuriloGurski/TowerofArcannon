@@ -6,14 +6,14 @@ var dash_timer: float = 0
 var dash_speed: float = 0
 var iframes : float = 0.0
 enum State {
-	IDLE,
+	IDLE, #0
 	ATTACK,
 	CAST,
 	INVULNERABLE,
 	HIT,
 	DODGE,
 	PARRY,
-	RUN
+	RUN #7
 }
 var current_state : State = State.IDLE
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
