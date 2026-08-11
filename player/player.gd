@@ -6,7 +6,7 @@ var dash_timer: float = 0
 var dash_speed: float = 0
 var iframes : float = 0.0
 var special_cooldown : float = 0.0
-var dash_cooldown : float = 0.0
+var mobility_cooldown : float = 0.0
 var secondary_cooldown : float = 0.0
 var buff_list : Array[Buff] = []
 enum State {
@@ -30,26 +30,31 @@ func _ready():
 
 
 func _physics_process(_delta: float) -> void:
+	
+	tick_cooldowns(_delta)
+	update_buffs(_delta)
 	if current_state == State.DODGE:
 		handle_dash(_delta)
 		move_and_slide()
 		return
+		
 	if current_state == State.ATTACK:
 		velocity = Vector2.ZERO
 		return
-	if Input.is_action_just_pressed("attack") and current_state != State.ATTACK:
+		
+	if Input.is_action_just_pressed("attack") and can_use_attack():
 		hero.attack_ability.use(self,last_direction)
-	if Input.is_action_just_pressed("dodge") and current_state != State.DODGE:
+		
+	if Input.is_action_just_pressed("dodge") and can_use_mobility():
 		hero.mobility_ability.use(self,last_direction)
-	if Input.is_action_just_pressed("special") and special_cooldown <= 0.0:
+		
+	if Input.is_action_just_pressed("special") and can_use_special():
 		hero.special_ability.use(self)
 		print(get_strength())
 	#Parar de se mover ao atacar
-	tick_cooldowns(_delta)
-	update_buffs(_delta)
 	move()
 	move_and_slide()
-	#hero.animation_type()
+	animation_type()
 	
 
 func apply_hero(h: Hero):
@@ -88,20 +93,64 @@ func play_animation(state: State, dir: Vector2) -> void:
 	if anim_name != "":
 		animated_sprite_2d.play(anim_name)
 		
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if current_state == State.ATTACK:
+		current_state = State.IDLE
+	if current_state == State.DODGE:
+		current_state = State.IDLE
 #----------------------------------------#
 #	     		 ATACAR			 		 #
 #----------------------------------------#
 		
-func attack()-> void:
+func start_attack()-> void:
 	current_state = State.ATTACK
-	play_animation(State.ATTACK, last_direction)
 
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if current_state == State.ATTACK:
-		current_state == State.IDLE
-	if current_state == State.DODGE:
-		current_state == State.IDLE
+func can_use_attack() -> bool:
+	if current_state != State.ATTACK:
+		return true
+	else:
+		return false
+
+#----------------------------------------#
+#	     		SPECIAL 			 	 #
+#----------------------------------------#
+
+func start_special_cooldown(cooldown : float):
+	special_cooldown = cooldown
+
+func can_use_special() -> bool:
+	if special_cooldown < 0.0:
+		return true
+	else:
+		return false
+
+#----------------------------------------#
+#	     	   SECONDARY 			 	 #
+#----------------------------------------#
+
+func start_secondary_cooldown(cooldown : float):
+	secondary_cooldown = cooldown
+	
+func can_use_secondary() -> bool:
+	if secondary_cooldown < 0.0:
+		return true
+	else:
+		return false
 		
+#----------------------------------------#
+#	     	   MOBILITY 			 	 #
+#----------------------------------------#
+
+func start_mobility_cooldown(cooldown : float):
+	mobility_cooldown = cooldown
+
+func can_use_mobility() -> bool:
+	if mobility_cooldown < 0.0 and current_state != State.DODGE:
+		return true
+	else:
+		return false
+	
 #----------------------------------------#
 #	     		 DASH 			 		 #
 #----------------------------------------#
@@ -123,10 +172,9 @@ func handle_dash(delta):
 #	     		 BUFF 			 		 #
 #----------------------------------------#
 
-func apply_buff(name : String, stat : int, value : float ,duration : float, multi : bool, cooldown : float):
+func apply_buff(name : String, stat : int, value : float ,duration : float, multi : bool):
 	var buff = Buff.new(name, stat,value,duration,multi)
 	buff_list.append(buff)
-	special_cooldown = cooldown
 
 func update_buffs(delta):
 	for i in range(buff_list.size() - 1, -1, -1):
@@ -197,5 +245,5 @@ func get_intellect() -> int:
 
 func tick_cooldowns(delta : float):
 	special_cooldown -= delta
-	dash_cooldown -= delta
+	mobility_cooldown -= delta
 	secondary_cooldown -= delta

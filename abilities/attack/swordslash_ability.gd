@@ -1,8 +1,13 @@
 extends Ability
 
-#@export var speed := 500.0
-#@export var duration := 0.25
+@export var damage := 500.0
+@export var startup := 0.25
+@export var active_time := 0.1
+
+@export var hitbox_shape : Shape2D
+@export var hitbox_offset := 0.2
+
 
 func use(controller, dir):
-	#controller.start_dash(dir, speed, duration)
+	controller.start_attack()
 	controller.play_animation(animation_id, dir)

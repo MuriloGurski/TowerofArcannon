@@ -7,4 +7,5 @@ extends Ability
 @export var multi : bool
 
 func use(controller):
-	controller.apply_buff(ability_name, attribute, value, duration, multi, cooldown)
+	controller.start_special_cooldown(cooldown)
+	controller.apply_buff(ability_name, attribute, value, duration, multi)
