@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://pdvula03oo1" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Resource" uid="uid://b2qtwxwr11rnb" path="res://heroes/definitions/generic_hero.tres" id="2_g1dw6"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
+
 [node name="Player" type="CharacterBody2D" unique_id=966591663]
 script = ExtResource("1_rkbax")
 hero = ExtResource("2_g1dw6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1715573463]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1967634805]
+shape = SubResource("CapsuleShape2D_rkbax")
