@@ -11,4 +11,6 @@ radius = 60.0
 script = ExtResource("1_3pbsp")
 hitbox_shape = SubResource("CapsuleShape2D_30uc2")
 hitbox_shape2 = SubResource("CircleShape2D_gp66c")
+ability_name = "Q do Kayn"
+cooldown = 10.0
 metadata/_custom_type_script = "uid://bv6p1pqodmcsg"

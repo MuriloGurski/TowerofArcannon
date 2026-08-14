@@ -10,6 +10,7 @@ var secondary_cooldown : float = 0.0
 var buff_list : Array[Buff] = []
 var is_attacking := false
 var is_dashing := false
+var movement_multiplier := 1.0
 enum State {
 	IDLE, #0
 	ATTACK,
@@ -39,10 +40,6 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 		return
 		
-	if is_attacking:
-		velocity = Vector2.ZERO
-		return
-		
 	if Input.is_action_just_pressed("attack") and can_use_attack():
 		hero.attack_ability.use(self)
 		
@@ -51,7 +48,11 @@ func _physics_process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("special") and can_use_special():
 		hero.special_ability.use(self)
-	#Parar de se mover ao atacar
+		
+	if Input.is_action_just_pressed("secondary") and can_use_secondary():
+		hero.secondary_ability.use(self)
+		print(get_strength())
+	
 	move()
 	move_and_slide()
 	animation_type()
@@ -64,7 +65,7 @@ func apply_hero(h: Hero):
 func move()-> void:
 	var direction := Input.get_vector("left", "right", "up", "down")
 	if direction != Vector2.ZERO:
-		velocity = direction * hero.speed
+		velocity = direction * (hero.speed*movement_multiplier)
 		last_direction = direction
 	else:
 		velocity = Vector2.ZERO
@@ -110,6 +111,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func start_attack(attack : Ability)-> void:
 	current_state = State.ATTACK
 	is_attacking = true
+	movement_multiplier = attack.speed_multiplier
 	var attack_direction := (get_global_mouse_position() - global_position).normalized()
 	var hitbox_position : Vector2 = attack_direction * attack.hitbox_offset
 	
@@ -124,6 +126,7 @@ func start_attack(attack : Ability)-> void:
 func second_attack(attack : Ability) -> void:
 	current_state = State.ATTACK
 	is_attacking = true
+	movement_multiplier = attack.speed_multiplier2
 	var attack_direction := (get_global_mouse_position() - global_position).normalized()
 	var hitbox_position : Vector2 = attack_direction * attack.hitbox_offset2
 	
@@ -139,6 +142,7 @@ func attack_startup(startup : float):
 
 func finish_attack() -> void:
 	current_state = State.IDLE
+	movement_multiplier = 1.0
 	is_attacking = false
 
 func can_use_attack() -> bool:
