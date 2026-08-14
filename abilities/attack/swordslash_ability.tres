@@ -7,7 +7,7 @@ size = Vector2(30, 60)
 
 [resource]
 script = ExtResource("1_hrfo8")
-active_time = 0.5
+active_time = 0.1
 hitbox_shape = SubResource("RectangleShape2D_ua6cf")
 hitbox_offset = 30.0
 ability_name = "Sword Slash"

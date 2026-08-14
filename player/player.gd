@@ -115,12 +115,12 @@ func start_attack(attack : Ability)-> void:
 	var attack_direction := (get_global_mouse_position() - global_position).normalized()
 	var hitbox_position : Vector2 = attack_direction * attack.hitbox_offset
 	
-	await attack_startup(attack.startup)
-	
 	if attack.is_projectile:
 		pass
 	else:
 		await create_hitbox(attack.hitbox_shape,hitbox_position,attack.active_time,attack_direction.angle())
+	
+	finish_attack()
 
 
 func second_attack(attack : Ability) -> void:
@@ -130,12 +130,12 @@ func second_attack(attack : Ability) -> void:
 	var attack_direction := (get_global_mouse_position() - global_position).normalized()
 	var hitbox_position : Vector2 = attack_direction * attack.hitbox_offset2
 	
-	await attack_startup(attack.startup2)
-	
 	if attack.is_projectile:
 		pass
 	else:
 		await create_hitbox(attack.hitbox_shape2,hitbox_position,attack.active_time2,attack_direction.angle())
+		
+		finish_attack()
 
 func attack_startup(startup : float):
 	await get_tree().create_timer(startup).timeout
@@ -172,12 +172,9 @@ func create_hitbox(shape : Shape2D, hitbox_position : Vector2, active_time : flo
 	
 	var visual = create_hitbox_visual(shape)
 	hitbox.add_child(visual)
-	
 	await get_tree().create_timer(active_time).timeout
-	
 	hitbox.queue_free()
 	
-	finish_attack()
 	
 #----------------------------------------#
 #	     		SPECIAL 			 	 #

@@ -3,8 +3,8 @@ extends Ability
 @export var is_projectile : bool
 
 @export var damage := 500.0
-@export var startup := 0.25
-@export var active_time := 0.1
+@export var startup := 0.1
+@export var active_time := 0.2
 @export var speed_multiplier := 0.3
 
 @export var hitbox_shape : Shape2D
