@@ -11,7 +11,7 @@ extends Ability
 
 
 
-func use(controller, dir):
+func use(controller):
 	controller.start_attack(self)
-	controller.play_animation(animation_id, dir)
+	controller.play_animation(animation_id, controller.last_direction)
 	
