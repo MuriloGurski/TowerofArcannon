@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 var last_direction: Vector2 = Vector2.RIGHT
 var dash_timer: float = 0 
 var dash_speed: float = 0
@@ -68,8 +67,12 @@ func move()-> void:
 		last_direction = direction
 	else:
 		velocity = Vector2.ZERO
-	
-#Define quando será tocada a animação Idle, Run, Attack e Dodge	
+
+#----------------------------------------#
+#	     	   ANIMATION			 	 #
+#----------------------------------------#
+
+#Define quando será tocada a animação Idle e Run.
 func animation_type() -> void:
 	if current_state == State.ATTACK:
 		return
@@ -80,7 +83,7 @@ func animation_type() -> void:
 	else:
 		play_animation(State.IDLE, last_direction)
 	
-	
+#Toca animação baseado no estado do player
 func play_animation(state: State, dir: Vector2) -> void:
 	var key := state
 	
@@ -103,14 +106,59 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 #	     		 ATACAR			 		 #
 #----------------------------------------#
 		
-func start_attack()-> void:
+func start_attack(damage : float, startup : float, active_time : float, hitbox_shape : Shape2D, hitbox_offset : float)-> void:
 	current_state = State.ATTACK
+	var attack_direction := (get_global_mouse_position() - global_position).normalized()
+	var hitbox_position := attack_direction * hitbox_offset
+	
+	if is_projectile():
+		pass
+	else:
+		create_hitbox(hitbox_shape,hitbox_position,active_time,attack_direction.angle())
+	
+
+func finish_attack() -> void:
+	current_state = State.IDLE
+
+func is_projectile() -> bool:
+	return hero.attack_ability.is_projectile
 
 func can_use_attack() -> bool:
 	if current_state != State.ATTACK:
 		return true
 	else:
 		return false
+
+func create_hitbox(shape : Shape2D, hitbox_position : Vector2, active_time : float, angle : float):
+	
+	var hitbox := Area2D.new()
+	var collision := CollisionShape2D.new()
+	
+	collision.shape = shape
+	hitbox.add_child(collision)
+	
+	add_child(hitbox)
+	hitbox.position = hitbox_position
+	hitbox.rotation = angle
+	
+	# Debug visualization
+	var visual := Polygon2D.new()
+	var half_size : Vector2 = shape.size/2.0
+	visual.polygon = PackedVector2Array([
+		Vector2(-half_size.x, -half_size.y),
+		Vector2(half_size.x, -half_size.y),
+		Vector2(half_size.x, half_size.y),
+		Vector2(-half_size.x, half_size.y)
+	])
+	visual.color = Color(1, 0, 0, 0.4)
+	
+	hitbox.add_child(visual)
+	
+	await get_tree().create_timer(active_time).timeout
+	
+	hitbox.queue_free()
+	
+	finish_attack()
 
 #----------------------------------------#
 #	     		SPECIAL 			 	 #

@@ -3,10 +3,13 @@
 [ext_resource type="Script" uid="uid://dru2g1mgq803p" path="res://abilities/attack/swordslash_ability.gd" id="1_hrfo8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua6cf"]
+size = Vector2(30, 60)
 
 [resource]
 script = ExtResource("1_hrfo8")
+active_time = 0.5
 hitbox_shape = SubResource("RectangleShape2D_ua6cf")
+hitbox_offset = 30.0
 ability_name = "Sword Slash"
 cooldown = 1.0
 animation_id = 1
