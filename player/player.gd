@@ -106,22 +106,19 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 #	     		 ATACAR			 		 #
 #----------------------------------------#
 		
-func start_attack(damage : float, startup : float, active_time : float, hitbox_shape : Shape2D, hitbox_offset : float)-> void:
+func start_attack(attack : Ability)-> void:
 	current_state = State.ATTACK
 	var attack_direction := (get_global_mouse_position() - global_position).normalized()
-	var hitbox_position := attack_direction * hitbox_offset
+	var hitbox_position : Vector2 = attack_direction * attack.hitbox_offset
 	
-	if is_projectile():
+	if attack.is_projectile:
 		pass
 	else:
-		create_hitbox(hitbox_shape,hitbox_position,active_time,attack_direction.angle())
+		create_hitbox(attack.hitbox_shape,hitbox_position,attack.active_time,attack_direction.angle())
 	
 
 func finish_attack() -> void:
 	current_state = State.IDLE
-
-func is_projectile() -> bool:
-	return hero.attack_ability.is_projectile
 
 func can_use_attack() -> bool:
 	if current_state != State.ATTACK:
@@ -133,6 +130,7 @@ func create_hitbox(shape : Shape2D, hitbox_position : Vector2, active_time : flo
 	
 	var hitbox := Area2D.new()
 	var collision := CollisionShape2D.new()
+	var hit_targets: Array[Node] = []
 	
 	collision.shape = shape
 	hitbox.add_child(collision)
@@ -140,6 +138,12 @@ func create_hitbox(shape : Shape2D, hitbox_position : Vector2, active_time : flo
 	add_child(hitbox)
 	hitbox.position = hitbox_position
 	hitbox.rotation = angle
+	
+	hitbox.body_entered.connect(
+		func(body):
+			if body not in hit_targets:
+				hit_targets.append(body)
+	)
 	
 	# Debug visualization
 	var visual := Polygon2D.new()
@@ -159,7 +163,7 @@ func create_hitbox(shape : Shape2D, hitbox_position : Vector2, active_time : flo
 	hitbox.queue_free()
 	
 	finish_attack()
-
+	
 #----------------------------------------#
 #	     		SPECIAL 			 	 #
 #----------------------------------------#

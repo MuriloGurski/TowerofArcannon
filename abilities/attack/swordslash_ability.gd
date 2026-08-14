@@ -12,5 +12,6 @@ extends Ability
 
 
 func use(controller, dir):
-	controller.start_attack(damage,startup,active_time,hitbox_shape,hitbox_offset)
+	controller.start_attack(self)
 	controller.play_animation(animation_id, dir)
+	
