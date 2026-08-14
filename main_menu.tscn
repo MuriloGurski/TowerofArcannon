@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://be3xvkxml43ns"]
 
-[ext_resource type="Texture2D" uid="uid://h60jy38ypafw" path="res://Textures/backgroundmenu.png" id="1_0avsf"]
-[ext_resource type="FontFile" uid="uid://wtywq2lmby41" path="res://Fonts/ARCADECLASSIC.TTF" id="2_pg8hl"]
-[ext_resource type="Texture2D" uid="uid://c8kslrageliyy" path="res://Textures/menuoptionicon.png" id="2_sesqc"]
+[ext_resource type="Texture2D" uid="uid://h60jy38ypafw" path="res://ui/menus/backgroundmenu.png" id="1_0avsf"]
+[ext_resource type="FontFile" uid="uid://wtywq2lmby41" path="res://assets/fonts/ARCADECLASSIC.TTF" id="2_pg8hl"]
+[ext_resource type="Texture2D" uid="uid://c8kslrageliyy" path="res://ui/menus/menuoptionicon.png" id="2_sesqc"]
 
-[node name="Menu" type="Control"]
+[node name="Menu" type="Control" unique_id=738531739]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,14 +12,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1987930312]
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 653.0
 texture = ExtResource("1_0avsf")
 stretch_mode = 1
 
-[node name="MainMenu" type="VBoxContainer" parent="."]
+[node name="MainMenu" type="VBoxContainer" parent="." unique_id=18313049]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,28 +34,28 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="StartButton" type="Button" parent="MainMenu"]
+[node name="StartButton" type="Button" parent="MainMenu" unique_id=2102758446]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_pg8hl")
 text = "Start"
 icon = ExtResource("2_sesqc")
 alignment = 0
 
-[node name="OptionsButton" type="Button" parent="MainMenu"]
+[node name="OptionsButton" type="Button" parent="MainMenu" unique_id=2026648789]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_pg8hl")
 text = "Options"
 icon = ExtResource("2_sesqc")
 alignment = 0
 
-[node name="QuitButton" type="Button" parent="MainMenu"]
+[node name="QuitButton" type="Button" parent="MainMenu" unique_id=603179358]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_pg8hl")
 text = "Quit"
 icon = ExtResource("2_sesqc")
 alignment = 0
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1546709818]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.500434

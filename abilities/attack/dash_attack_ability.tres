@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://1001nfctcg8t"]
+
+[ext_resource type="Script" uid="uid://byi6bphbieg6y" path="res://abilities/attack/dash_attack_ability.gd" id="1_3pbsp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_30uc2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gp66c"]
+radius = 60.0
+
+[resource]
+script = ExtResource("1_3pbsp")
+hitbox_shape = SubResource("CapsuleShape2D_30uc2")
+hitbox_shape2 = SubResource("CircleShape2D_gp66c")
+ability_name = "Q do Kayn"
+cooldown = 10.0
+metadata/_custom_type_script = "uid://bv6p1pqodmcsg"
