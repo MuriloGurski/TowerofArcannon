@@ -32,6 +32,8 @@ func _ready_inventory():
 		if slot_node.has_method("set_grid_position"):
 			slot_node.set_grid_position(coords)
 		
+		slot_node.inventory_slot_clicked.connect(_on_inventory_slot_clicked)
+		
 	print("Inventory map initialized: ", inventory_map.size(), " slots mapped.")
 func _ready_equipment():
 	
@@ -73,3 +75,9 @@ func _find_free_inventory_slot():
 			pass
 			
 	print("Inventory Full")
+func _on_inventory_slot_clicked(coords : Vector2i, event_button : int):
+	if event_button == MOUSE_BUTTON_LEFT:
+		print("Left click on: ", coords)
+	elif event_button == MOUSE_BUTTON_RIGHT:
+		print("Right click on: ", coords)
+	
