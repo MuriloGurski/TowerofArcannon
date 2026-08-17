@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://byjohdegsmtkv"]
+
+[ext_resource type="Script" uid="uid://btq150gmtxcgx" path="res://ui/equipment_slot.gd" id="1_0pla6"]
+
+[node name="Equipment Slot" type="Panel" unique_id=133638363]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_0pla6")
