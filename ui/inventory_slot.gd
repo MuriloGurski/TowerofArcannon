@@ -1,6 +1,6 @@
 extends Panel
 
-signal inventory_slot_clicked(coords: Vector2i, button_index : int)
+signal inventory_slot_clicked(coords: Vector2i, event_button : int)
 
 var grid_position : Vector2i
 # Called when the node enters the scene tree for the first time.

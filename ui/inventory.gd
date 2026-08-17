@@ -53,7 +53,9 @@ func _ready_equipment():
 		
 		if slot_node.has_method("set_grid_position"):
 			slot_node.set_grid_position(coords)
-	
+		
+		slot_node.equipment_slot_clicked.connect(_on_equipment_slot_clicked)
+		
 	for i in range(right_children.size()):
 		
 		var slot_node = right_children[i]
@@ -64,6 +66,8 @@ func _ready_equipment():
 		
 		if slot_node.has_method("set_grid_position"):
 			slot_node.set_grid_position(coords)
+		
+		slot_node.equipment_slot_clicked.connect(_on_equipment_slot_clicked)
 	
 	print("Equipment map initialized: ", equipment_map.size(), " slots mapped.")
 func _find_free_inventory_slot():
@@ -76,6 +80,11 @@ func _find_free_inventory_slot():
 			
 	print("Inventory Full")
 func _on_inventory_slot_clicked(coords : Vector2i, event_button : int):
+	if event_button == MOUSE_BUTTON_LEFT:
+		print("Left click on: ", coords)
+	elif event_button == MOUSE_BUTTON_RIGHT:
+		print("Right click on: ", coords)
+func _on_equipment_slot_clicked(coords : Vector2i, event_button : int):
 	if event_button == MOUSE_BUTTON_LEFT:
 		print("Left click on: ", coords)
 	elif event_button == MOUSE_BUTTON_RIGHT:

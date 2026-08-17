@@ -1,5 +1,7 @@
 extends Panel
 
+signal equipment_slot_clicked(coords : Vector2i, event_button : int)
+
 var grid_position : Vector2i
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,8 +15,4 @@ func set_grid_position(coords: Vector2i) -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			_on_slot_clicked()
-			
-func _on_slot_clicked():
-	print("Clicked visual slot at grid coordinate: ", grid_position)
+		equipment_slot_clicked.emit(grid_position, event.button_index)
