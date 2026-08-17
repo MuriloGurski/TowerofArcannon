@@ -64,3 +64,12 @@ func _ready_equipment():
 			slot_node.set_grid_position(coords)
 	
 	print("Equipment map initialized: ", equipment_map.size(), " slots mapped.")
+func _find_free_inventory_slot():
+	for key in inventory_map:
+		if inventory_map[key] == null:
+			print(key)
+			return key
+		else:
+			pass
+			
+	print("Inventory Full")
