@@ -3,6 +3,7 @@ extends Control
 @onready var inventory_slots : GridContainer = $"Inventory Container/Inventory Slots"
 @onready var equipment_box : HBoxContainer = $"Inventory Container/Equipment Box"
 
+var hold_coord = null
 var inventory_map : Dictionary = {}
 var equipment_map : Dictionary = {}
 # Called when the node enters the scene tree for the first time.
@@ -80,13 +81,40 @@ func _find_free_inventory_slot():
 			
 	print("Inventory Full")
 func _on_inventory_slot_clicked(coords : Vector2i, event_button : int):
+	print("inventory call")
 	if event_button == MOUSE_BUTTON_LEFT:
 		print("Left click on: ", coords)
+		if hold_coord == null:
+			hold_coord = coords
+			print("holding: ", coords)
+		elif inventory_map[hold_coord] != null:
+			print("moving")
+			_move_item(inventory_map[hold_coord], hold_coord, coords)
 	elif event_button == MOUSE_BUTTON_RIGHT:
 		print("Right click on: ", coords)
+		if inventory_map[coords] == null:
+			var test_ring = load("res://items/ring.tres") as Item
+			_add_item(test_ring, coords)
+		else:
+			pass
 func _on_equipment_slot_clicked(coords : Vector2i, event_button : int):
 	if event_button == MOUSE_BUTTON_LEFT:
 		print("Left click on: ", coords)
 	elif event_button == MOUSE_BUTTON_RIGHT:
 		print("Right click on: ", coords)
-	
+func _add_item(item : Item, coords : Vector2i):
+	if inventory_map[coords] == null:
+		inventory_map[coords] = item
+		"added item"
+	else:
+		print("Slot Occupied")
+func _move_item(item : Item, original_coords : Vector2i, target_coords : Vector2i):
+	if inventory_map[target_coords] == null:
+		inventory_map[original_coords] = null
+		inventory_map[target_coords] = item
+		hold_coord = null
+		print("moved")
+	else:
+		hold_coord = null
+		print("failed to move")
+		return
