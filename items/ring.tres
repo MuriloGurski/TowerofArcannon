@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://c66u8xt70knoa"]
 
 [ext_resource type="Script" uid="uid://cejxkxl2wdt6w" path="res://items/item.gd" id="1_dyxe3"]
+[ext_resource type="Texture2D" uid="uid://7cw3wjcymxkb" path="res://assets/sprites/items/ring.png" id="2_1ib1g"]
 
 [resource]
 script = ExtResource("1_dyxe3")
 name = "Ring"
+texture = ExtResource("2_1ib1g")
 max_stack = 1
 metadata/_custom_type_script = "uid://cejxkxl2wdt6w"
