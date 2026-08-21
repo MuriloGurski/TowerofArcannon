@@ -8,3 +8,8 @@ custom_maximum_size = Vector2(40, 40)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_0pla6")
+
+[node name="Item Sprite" type="TextureRect" parent="." unique_id=1897719991]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

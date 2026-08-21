@@ -7,6 +7,7 @@ var hold_coord = null
 var inventory_map : Dictionary = {}
 var equipment_map : Dictionary = {}
 var inventory_slot_nodes : Dictionary = {}
+var equipment_slot_nodes : Dictionary = {}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_ready_inventory()
@@ -53,7 +54,7 @@ func _ready_equipment():
 		var y = i
 		var coords = Vector2i(0,y)
 		equipment_map[coords] = null
-		
+		equipment_slot_nodes[coords] = slot_node
 		
 		if slot_node.has_method("set_grid_position"):
 			slot_node.set_grid_position(coords)
@@ -67,6 +68,7 @@ func _ready_equipment():
 		var y = i
 		var coords = Vector2i(1,y)
 		equipment_map[coords] = null
+		equipment_slot_nodes[coords] = slot_node
 		
 		if slot_node.has_method("set_grid_position"):
 			slot_node.set_grid_position(coords)
@@ -108,6 +110,14 @@ func _on_inventory_slot_clicked(coords: Vector2i, event_button: int):
 		if inventory_map[coords] == null:
 			var test_ring = load("res://items/ring.tres") as Item
 			_add_item(test_ring, coords)
+		else:
+			print("Checking if can equip: ", inventory_map[coords])
+			if _can_equip(inventory_map[coords]):
+				print("Can equip")
+				_equip_item(inventory_map[coords])
+				update_slot(coords, null)
+			else:
+				print ("Cant equip")
 func _on_equipment_slot_clicked(coords : Vector2i, event_button : int):
 	if event_button == MOUSE_BUTTON_LEFT:
 		print("Left click on: ", coords)
@@ -147,3 +157,37 @@ func _move_item(from: Vector2i, to: Vector2i):
 func update_slot(coords: Vector2i, item: Item):
 	inventory_map[coords] = item
 	inventory_slot_nodes[coords].set_item(item)
+func update_equip_slot(coords : Vector2i, item : Item):
+	equipment_map[coords] = item
+	equipment_slot_nodes[coords].set_item(item)
+func _can_equip(item: Item) -> bool:
+	if item.equipment_type != EquipmentType.Type.NONE:
+		var equipment_slot_coords = _find_compatible_equip_slot(item)
+		if equipment_slot_coords != Vector2i(-1,-1):
+			return true
+		else:
+			return false
+	else:
+		return false
+func _find_compatible_equip_slot(item : Item) -> Vector2i:
+	var return_key := Vector2i(-1,-1)
+	for key in equipment_slot_nodes:
+		print(key)
+		if equipment_slot_nodes[key].equipment_type == item.equipment_type and equipment_map[key] == null:
+			return_key = key
+			return return_key
+	return return_key
+func _equip_item(item: Item):
+	var equipment_slot_coords = _find_compatible_equip_slot(item)
+	if equipment_slot_coords != Vector2i(-1,-1):
+		update_equip_slot(equipment_slot_coords, item)
+	else:
+		print("Invalid Slot")
+	
+	
+	
+	
+	
+	
+	
+	

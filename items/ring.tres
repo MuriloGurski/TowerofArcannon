@@ -8,4 +8,6 @@ script = ExtResource("1_dyxe3")
 name = "Ring"
 texture = ExtResource("2_1ib1g")
 max_stack = 1
+category = 1
+equipment_type = 6
 metadata/_custom_type_script = "uid://cejxkxl2wdt6w"
