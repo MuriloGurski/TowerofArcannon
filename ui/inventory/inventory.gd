@@ -108,8 +108,6 @@ func _on_inventory_slot_clicked(coords: Vector2i, event_button: int):
 		if inventory_map[coords] == null:
 			var test_ring = load("res://items/ring.tres") as Item
 			_add_item(test_ring, coords)
-
-
 func _on_equipment_slot_clicked(coords : Vector2i, event_button : int):
 	if event_button == MOUSE_BUTTON_LEFT:
 		print("Left click on: ", coords)
@@ -119,7 +117,7 @@ func _add_item(item: Item, coords: Vector2i):
 	
 	if inventory_map[coords] == null:
 		
-		inventory_map[coords] = item
+		update_slot(coords, item)
 		var slot_node = inventory_slot_nodes[coords]
 		
 		if slot_node.has_method("set_item"):
@@ -128,21 +126,24 @@ func _add_item(item: Item, coords: Vector2i):
 		print("Added item")
 	else:
 		print("Slot Occupied")
-		
-func _move_item(original_coords: Vector2i, target_coords: Vector2i):
+func _move_item(from: Vector2i, to: Vector2i):
 	
-	var item = inventory_map[original_coords]
+	var item = inventory_map[from]
 	if item == null:
 		return
 		
-	if inventory_map[target_coords] != null:
-		print("Target occupied")
+	if inventory_map[to] != null:
+		
+		var swapped_item = inventory_map[to]
+		update_slot(from, swapped_item)
+		update_slot(to, item)
+		print("Items Swapped")
 		return
 		
-	inventory_map[original_coords] = null
-	inventory_map[target_coords] = item
-	
-	inventory_slot_nodes[original_coords].set_item(null)
-	inventory_slot_nodes[target_coords].set_item(item)
+	update_slot(from, null)
+	update_slot(to, item)
 	
 	hold_coord = null
+func update_slot(coords: Vector2i, item: Item):
+	inventory_map[coords] = item
+	inventory_slot_nodes[coords].set_item(item)
