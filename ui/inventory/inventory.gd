@@ -179,10 +179,7 @@ func _find_compatible_equip_slot(item : Item) -> Vector2i:
 	return return_key
 func _equip_item(item: Item):
 	var equipment_slot_coords = _find_compatible_equip_slot(item)
-	if equipment_slot_coords != Vector2i(-1,-1):
-		update_equip_slot(equipment_slot_coords, item)
-	else:
-		print("Invalid Slot")
+	update_equip_slot(equipment_slot_coords, item)
 	
 	
 	
