@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://cphsaodcvcahs"]
+
+[ext_resource type="Script" uid="uid://dk8wvdp2wr4rn" path="res://abilities/spells/dark_sorcerer/magic_missile.gd" id="1_3mloe"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3mloe"]
+radius = 4.0
+height = 12.0
+
+[resource]
+script = ExtResource("1_3mloe")
+is_projectile = true
+cast_time = 0.3
+projectile_speed = 450
+projectile_count = 6
+hitbox_shape = SubResource("CapsuleShape2D_3mloe")
+ability_name = "Magic Missile"
+cooldown = 2.0
+animation_id = 2
+metadata/_custom_type_script = "uid://bv6p1pqodmcsg"

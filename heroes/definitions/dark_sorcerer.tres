@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Hero" format=3 uid="uid://dwja0q7onsus4"]
+
+[ext_resource type="Script" uid="uid://c58fge2awg4ww" path="res://heroes/generic_hero.gd" id="1_0byvs"]
+[ext_resource type="Resource" uid="uid://cphsaodcvcahs" path="res://abilities/spells/dark_sorcerer/magic_missile.tres" id="1_ygld2"]
+
+[resource]
+script = ExtResource("1_0byvs")
+hero_name = "Dark Sorcerer"
+attack_ability = ExtResource("1_ygld2")
+metadata/_custom_type_script = "uid://c58fge2awg4ww"

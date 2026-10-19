@@ -4,6 +4,7 @@ var last_direction: Vector2 = Vector2.RIGHT
 var dash_timer: float = 0 
 var dash_speed: float = 0
 var iframes : float = 0.0
+var primary_cooldown : float = 0.0
 var special_cooldown : float = 0.0
 var mobility_cooldown : float = 0.0
 var secondary_cooldown : float = 0.0
@@ -40,7 +41,8 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 		return
 		
-	if Input.is_action_just_pressed("attack") and can_use_attack():
+	if Input.is_action_just_pressed("attack") and can_use_primary():
+		print("using primary")
 		hero.attack_ability.use(self)
 		
 	if Input.is_action_just_pressed("dodge") and can_use_mobility():
@@ -104,11 +106,23 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		current_state = State.IDLE
 	if current_state == State.DODGE:
 		current_state = State.IDLE
+
+#----------------------------------------#
+#	     		  CAST			 		 #
+#----------------------------------------#
+func start_duration_cast_attack_spell(spell : Ability) -> void:
+	current_state = State.CAST
+	
+	finish_cast()
+
+func finish_cast():
+	current_state = State.IDLE
 #----------------------------------------#
 #	     		 ATACAR			 		 #
 #----------------------------------------#
 		
 func start_attack(attack : Ability)-> void:
+	print("start attack")
 	current_state = State.ATTACK
 	is_attacking = true
 	movement_multiplier = attack.speed_multiplier
@@ -116,7 +130,10 @@ func start_attack(attack : Ability)-> void:
 	var hitbox_position : Vector2 = attack_direction * attack.hitbox_offset
 	
 	if attack.is_projectile:
-		pass
+		for projectile in attack.projectile_count:
+			await get_tree().create_timer(attack.cast_time).timeout
+			attack_direction = (get_global_mouse_position() - global_position).normalized()
+			create_projectile_hitbox(attack.hitbox_shape,hitbox_position,attack.active_time,attack_direction.angle(),attack.projectile_speed)
 	else:
 		await create_hitbox(attack.hitbox_shape,hitbox_position,attack.active_time,attack_direction.angle())
 	
@@ -145,12 +162,6 @@ func finish_attack() -> void:
 	movement_multiplier = 1.0
 	is_attacking = false
 
-func can_use_attack() -> bool:
-	if is_attacking:
-		return false
-	else:
-		return true
-
 func create_hitbox(shape : Shape2D, hitbox_position : Vector2, active_time : float, angle : float):
 	
 	var hitbox := Area2D.new()
@@ -175,7 +186,37 @@ func create_hitbox(shape : Shape2D, hitbox_position : Vector2, active_time : flo
 	await get_tree().create_timer(active_time).timeout
 	hitbox.queue_free()
 	
+func create_projectile_hitbox(
+		shape: Shape2D,
+		hitbox_position: Vector2,
+		active_time: float,
+		angle: float,
+		projectile_speed: float
+	) -> void:
+
+	var projectile = Area2D.new()
+	projectile.set_script(preload("res://abilities/projectile.gd"))
 	
+	get_tree().current_scene.add_child(projectile)
+	
+	projectile.setup(
+	shape,
+	hitbox_position,
+	angle,
+	projectile_speed,
+	active_time
+	)
+	var visual = create_hitbox_visual(shape)
+	projectile.add_child(visual)
+	
+func start_primary_cooldown(cooldown : float):
+	primary_cooldown = cooldown
+
+func can_use_primary() -> bool:
+	if primary_cooldown <= 0.0 and is_attacking == false:
+		return true
+	else:
+		return false
 #----------------------------------------#
 #	     		SPECIAL 			 	 #
 #----------------------------------------#
@@ -184,7 +225,7 @@ func start_special_cooldown(cooldown : float):
 	special_cooldown = cooldown
 
 func can_use_special() -> bool:
-	if special_cooldown < 0.0:
+	if special_cooldown <= 0.0:
 		return true
 	else:
 		return false
@@ -197,7 +238,7 @@ func start_secondary_cooldown(cooldown : float):
 	secondary_cooldown = cooldown
 	
 func can_use_secondary() -> bool:
-	if secondary_cooldown < 0.0:
+	if secondary_cooldown <= 0.0:
 		return true
 	else:
 		return false
@@ -210,7 +251,7 @@ func start_mobility_cooldown(cooldown : float):
 	mobility_cooldown = cooldown
 
 func can_use_mobility() -> bool:
-	if mobility_cooldown < 0.0 and !is_dashing:
+	if mobility_cooldown <= 0.0 and is_dashing == false:
 		return true
 	else:
 		return false
@@ -313,7 +354,7 @@ func tick_cooldowns(delta : float):
 	special_cooldown -= delta
 	mobility_cooldown -= delta
 	secondary_cooldown -= delta
-	
+	primary_cooldown -= delta
 
 func create_hitbox_visual(shape: Shape2D) -> Polygon2D:
 	# Debug visualization
